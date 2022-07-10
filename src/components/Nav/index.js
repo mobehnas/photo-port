@@ -1,5 +1,5 @@
-
-import React from 'react';
+import React from "react";
+import { capitalizeFirstLetter } from "../../utils/helpers";
 
 function Nav() {
   const  categories = [
@@ -9,12 +9,12 @@ function Nav() {
     { name: 'landscape', description: 'Fields, farmhouses, waterfalls, and the beauty of nature' }
   ];
 
-  function categorySelected(name) {
-    console.log(`${name} clicked`)
+  const handleClick = () => {
+    console.log("click handled")
   }
 
-    return (
-      <header>
+  return (
+    <header data-testid="header" className="flex-row px-1">
       <h2>
         <a href="/">
           <span role="img" aria-label="camera"> 📸</span> Oh Snap!
@@ -23,32 +23,28 @@ function Nav() {
       <nav>
         <ul className="flex-row">
           <li className="mx-2">
-            <a href="#about">
+            <a href="#about" onClick={() => handleClick()}>
               About me
             </a>
           </li>
-          <li>
-            <span>Contact</span>
+          <li className={"mx-2"}>
+            <span onClick={() => handleClick()}>
+              Contact
+            </span>
           </li>
-           {categories.map((category) => (
-            <li
-              className="mx-1"
-              key={category.name}
-            >
-              <span onClick= {categorySelected}>
-                {category.name}
-                
-              </span>
-            </li>
-          ))}
+          {
+            categories.map((category) => (
+              <li className="mx-1" key={category.name} >
+                <span onClick={() => { handleClick(); }}>
+                 {capitalizeFirstLetter(category.name)}
+                </span>
+              </li>
+            ))
+          }
         </ul>
       </nav>
     </header>
-    );
+  );
 }
-
-
-
-
 
 export default Nav;
